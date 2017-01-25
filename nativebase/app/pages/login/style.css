@@ -1,0 +1,16 @@
+Button {
+    background-color: #37474F;
+    margin-top: 15;
+    color: white;
+    border-radius: 15;
+    width: 50%;
+    height: 5%;
+}
+
+.txtfield {
+    border-color: red;
+    border-width: 0 0 1 0;
+    margin-top: 15;
+    margin-left: 15;
+    margin-right: 15;
+}
