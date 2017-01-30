@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import firebase = require("nativescript-plugin-firebase");
+import { ActivatedRoute } from "@angular/router";
 
 
 @Component({
@@ -14,8 +15,18 @@ export class List {
 
     public ToDoList = [];
     public NewItem = "";
+    public UID;
+    public FirebaseUrl: string;
+
+    constructor(private router: ActivatedRoute) { 
+        this.router.queryParams.subscribe(params => {
+            this.UID = params["UID"];
+            this.FirebaseUrl = "users/"+this.UID;
+        })
+    }
 
     AddItemToList() {
+
         console.log(this.NewItem)
         if (this.ToDoList.some(x => x === this.NewItem)) {
             alert("your to do list already contains this tak")
@@ -23,12 +34,12 @@ export class List {
             alert("new task can not be nul")
         } else {
             this.ToDoList.push(this.NewItem)
+            console.log(this.FirebaseUrl)
             firebase.setValue(
-                '/list',
+                this.FirebaseUrl,
                 { task: this.NewItem }
             );
             this.NewItem = "";
         }
     }
-
 }
