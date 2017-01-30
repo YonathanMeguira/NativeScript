@@ -1,4 +1,13 @@
-
 <StackLayout>
-    <Label text=" hi "></Label>
+    <ActionBar title="Add item">
+        <ActionItem tap="AddToList(item)" ios.systemIcon="3" ios.position="left" />
+        <ActionItem tap="SaveList()" ios.systemIcon="16" ios.position="right" text="delete" />
+    </ActionBar>
+    <ListView [items]="ToDoList" class="list-group" (itemTap)="onItemTap($event)">
+        <template let-task="item" let-i="index">
+            <GridLayout class="list-group-item">
+                <Label [text]="item"></Label>
+            </GridLayout>
+        </template>
+    </ListView>
 </StackLayout>

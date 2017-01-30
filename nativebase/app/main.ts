@@ -6,7 +6,7 @@ import { AppModule } from "./app.module";
 import firebase = require("nativescript-plugin-firebase");
 
 firebase.init({
-    storageBucket: "gs://nativebase-75a5c.appspot.com";
+    storageBucket: "gs://nativebase-75a5c.appspot.com",
 
     // Optionally pass in properties for database, authentication and cloud messaging,
     // see their respective docs.

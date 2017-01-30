@@ -9,21 +9,21 @@ import firebase = require("nativescript-plugin-firebase");
     styleUrls: ['pages/login/style.css']
 })
 
+
 export class Login implements OnInit {
-
-
 
     Email;
     Password;
     IsLoggedIn;
 
-
     constructor(private router: Router) { }
+
 
     ngOnInit() {
         console.log("inside login screen")
         this.IsLoggedIn = false
     }
+
 
     SignUp() {
         console.log(this.Email)
@@ -43,12 +43,30 @@ export class Login implements OnInit {
                     message: errorMessage,
                     okButtonText: "OK, got it"
                 })
+                this.IsLoggedIn = false;
             }
-            );
+            )
     }
 
-    AlertMe() {
-        alert(this.Email + " : " + this.Password)
+
+    LoginFunc() {
+        firebase.login({
+            type: firebase.LoginType.PASSWORD,
+            email: this.Email,
+            password: this.Password
+        }).then(
+            (result) => {
+                JSON.stringify(result);
+                alert("congrats")
+                this.router.navigate(["List"]);
+                this.IsLoggedIn = true;
+            },
+            (errorMessage) => {
+                console.log(errorMessage);
+                this.IsLoggedIn = false;
+            }
+            )
     }
+
 
 }

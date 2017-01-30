@@ -10,5 +10,11 @@ import { Component } from "@angular/core";
 
 
 export class List {
-    
+    public ToDoList = [];
+
+    AddToList(task){
+        this.ToDoList.push(task)
+    }
+
+
 }

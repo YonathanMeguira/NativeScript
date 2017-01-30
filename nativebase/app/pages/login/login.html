@@ -7,6 +7,7 @@
     <TextField class="txtfield" hint="Focused TextField"  [(ngModel)] = "Email"></TextField>
     <TextField class="txtfield" hint="Focused TextField"  [(ngModel)] = "Password"></TextField>
 
-    <Button text = "SIGN UP" (tap) = "SignUp()" ></Button>
+    <!--<Button *ngIf = "!IsLoggedIn" text = "SIGN UP" (tap) = "SignUp()" ></Button>-->
+    <Button  text = "Log me in" (tap) = "DirectAccess()"></Button>
 
 </StackLayout>

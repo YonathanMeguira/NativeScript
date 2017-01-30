@@ -3,9 +3,11 @@
       src="res://logo_login"
       stretch="none"
       class="initial-logo"></Image>
+      <Label  text="Welcome"></Label>
     <TextField class="txtfield" hint="Focused TextField"  [(ngModel)] = "Email"></TextField>
     <TextField class="txtfield" hint="Focused TextField"  [(ngModel)] = "Password"></TextField>
 
-    <Button text = "SIGN UP" (tap) = "SignUp()" ></Button>
+    <Button *ngIf = "!IsLoggedIn" text = "SIGN UP" (tap) = "SignUp()" ></Button>
+    <Button *ngIf = "IsLoggedIn" text = "Log me in" (tap) = "LoginFunc()"></Button>
 
 </StackLayout>
