@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, NavigationExtras } from "@angular/router";
+import { Router } from "@angular/router";
 import firebase = require("nativescript-plugin-firebase");
-
+import { UIDProvider } from "../../shared/UID.Provider";
 
 @Component({
     selector: "Login",
@@ -15,22 +15,13 @@ export class Login implements OnInit {
     Email;
     Password;
     IsLoggedIn;
-    UID;
 
-
-
-    constructor(private router: Router) { }
-
+    constructor(private router: Router, private UIDProvider: UIDProvider) { }
 
     ngOnInit() {
-        this.IsLoggedIn = false
+        this.IsLoggedIn = false;
     }
 
-    navigationExtras: NavigationExtras = {
-        queryParams: {
-            "UID": this.UID
-        }
-    };
     SignUp() {
         console.log(this.Email)
         firebase.createUser({
@@ -40,7 +31,7 @@ export class Login implements OnInit {
             .then(
             (result) => {
                 this.IsLoggedIn = true;
-                this.router.navigate(["List"], this.navigationExtras);
+                this.router.navigate(["List"]);
 
             },
             (errorMessage) => {
@@ -62,8 +53,8 @@ export class Login implements OnInit {
             password: this.Password
         }).then(
             (result) => {
-                this.UID = result.uid
-                this.router.navigate(["List"], this.navigationExtras);
+                this.UIDProvider.UID = result.uid;
+                this.router.navigate(["List"]);
                 this.IsLoggedIn = true;
             },
             (errorMessage) => {
@@ -71,11 +62,5 @@ export class Login implements OnInit {
                 this.IsLoggedIn = false;
             }
             )
-    }
-
-    DirectAccess() {
-        this.router.navigate(["List"]);
-    }
-
-
+    };
 }

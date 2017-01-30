@@ -7,6 +7,7 @@
         <template let-task="item" let-i="index" >
             <GridLayout class="list-group-item">
                 <Label [text]="task"></Label>
+                <Button (tap) = "RemoveItemFromList(item)" text="-rf"></Button>
             </GridLayout>
         </template>
     </ListView>
