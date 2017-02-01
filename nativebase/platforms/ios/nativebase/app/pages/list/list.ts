@@ -39,9 +39,11 @@ export class List implements OnInit {
             if (!result.error) {
                 console.log("Event type: " + result.type);
                 console.log("Key: " + result.key);
-                console.log(result.value.task)
-               // this.ToDoList.push(result.value.task)
-              
+                console.log(result.value)
+                for (let i in result.value.task) {
+                    this.ToDoList.push(result.value.task[i])
+                }
+                return this.ToDoList;
             }
         };
 
