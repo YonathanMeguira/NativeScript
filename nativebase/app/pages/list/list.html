@@ -3,6 +3,7 @@
         <TextField [(ngModel)]="NewItem" row="1" col="0" class="new-item"></TextField>
         <Button (tap)="AddItemToList()" text="add" row="1" col="1"></Button>
     </StackLayout>
+    <Button (tap) = "LoadData()" text="Load Tasks"></Button>
     <ListView [items]="ToDoList" class="list-group" >
         <template let-task="item" let-i="index" >
             <GridLayout class="list-group-item">

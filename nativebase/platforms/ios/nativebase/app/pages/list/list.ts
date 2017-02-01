@@ -12,12 +12,14 @@ import { UIDProvider } from "../../shared/UID.Provider";
 
 
 
-export class List  {
+export class List implements OnInit {
 
-    public ToDoList = [];
     public NewItem = "";
     public UID;
-    public FirebaseUrl;
+    public FirebaseUrl: string;
+    public ToDoList: Array<any> = [];
+
+
 
     constructor(private UIDProvider: UIDProvider) {
 
@@ -26,8 +28,36 @@ export class List  {
         this.FirebaseUrl = "users/" + this.UID;
 
     }
-  
 
+
+    ngOnInit() {
+
+        var onQueryEvent = (result) => {
+            // note that the query returns 1 match at a time
+            // in the order specified in the query
+
+            if (!result.error) {
+                console.log("Event type: " + result.type);
+                console.log("Key: " + result.key);
+                console.log(result.value.task)
+               // this.ToDoList.push(result.value.task)
+              
+            }
+        };
+
+        console.log("queried")
+        firebase.query(
+            onQueryEvent,
+            this.FirebaseUrl,
+            {
+                singleEvent: true,
+                orderBy: {
+                    type: firebase.QueryOrderByType.KEY
+                },
+
+            }
+        );
+    }
 
     AddItemToList() {
 
