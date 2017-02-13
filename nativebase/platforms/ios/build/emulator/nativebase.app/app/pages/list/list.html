@@ -1,13 +1,27 @@
-<StackLayout>
-    <ActionBar title="Add item">
-        <ActionItem tap="AddToList(item)" ios.systemIcon="3" ios.position="left" />
-        <ActionItem tap="SaveList()" ios.systemIcon="16" ios.position="right" text="delete" />
-    </ActionBar>
-    <ListView [items]="ToDoList" class="list-group" (itemTap)="onItemTap($event)">
-        <template let-task="item" let-i="index">
+<!--<StackLayout>
+    <StackLayout class="input-field">
+        <TextField [(ngModel)]="NewItem" row="1" col="0" class="new-item"></TextField>
+        <Button (tap)="AddItemToList()" text="add" row="1" col="1"></Button>
+    </StackLayout>
+    <ListView [items]="ToDoList" class="list-group" >
+        <template let-task="item" let-i="index" >
             <GridLayout class="list-group-item">
-                <Label [text]="item"></Label>
+                <Label [text]="task"></Label>
+                <Button (tap) = "RemoveItemFromList(item)" text="-rf"></Button>
             </GridLayout>
         </template>
     </ListView>
+</StackLayout>-->
+<StackLayout>
+    <TextField [(ngModel)] = "NewItem"></TextField>
+    <Button (tap) = "AddItemToList()" text = "Add Item"></Button>
+    <GridLayout tkExampleTitle tkToggleNavButton>
+        <RadListView [items]="ToDoList">
+            <template tkListItemTemplate let-task="item">
+                <StackLayout orientation="vertical">
+                    <Label class="nameLabel" [text]="task"></Label>
+                </StackLayout>
+            </template>
+        </RadListView>
+    </GridLayout>
 </StackLayout>

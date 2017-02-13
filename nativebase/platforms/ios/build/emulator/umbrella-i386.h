@@ -567,7 +567,7 @@
 #import "/Users/jonathan/Desktop/NativeScript/nativebase/platforms/ios/Pods/FirebaseAnalytics/Frameworks/frameworks/FirebaseAnalytics.framework/Headers/FIRParameterNames.h"
 #import "/Users/jonathan/Desktop/NativeScript/nativebase/platforms/ios/Pods/FirebaseAnalytics/Frameworks/frameworks/FirebaseAnalytics.framework/Headers/FIRUserPropertyNames.h"
 #import "/Users/jonathan/Desktop/NativeScript/nativebase/platforms/ios/Pods/FirebaseAnalytics/Frameworks/frameworks/FirebaseAnalytics.framework/Headers/FirebaseAnalytics.h"
-#import "/Users/jonathan/Desktop/NativeScript/nativebase/platforms/ios/../../lib/iOS/TNSWidgets.framework/Headers/TNSWidgets.h"
+#import "/Users/jonathan/Desktop/NativeScript/nativebase/platforms/ios/../../node_modules/tns-core-modules-widgets/platforms/ios/TNSWidgets.framework/Headers/TNSWidgets.h"
 #import "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator10.2.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.h"
 #import "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator10.2.sdk/System/Library/Frameworks/QuickLook.framework/Headers/QuickLook.h"
 #import "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator10.2.sdk/System/Library/Frameworks/ReplayKit.framework/Headers/ReplayKit.h"

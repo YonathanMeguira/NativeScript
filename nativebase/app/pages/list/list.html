@@ -1,14 +1,3 @@
 <StackLayout>
-    <StackLayout class="input-field">
-        <TextField [(ngModel)]="NewItem" row="1" col="0" class="new-item"></TextField>
-        <Button (tap)="AddItemToList()" text="add" row="1" col="1"></Button>
-    </StackLayout>
-    <ListView [items]="ToDoList" class="list-group" >
-        <template let-task="item" let-i="index" >
-            <GridLayout class="list-group-item">
-                <Label [text]="task"></Label>
-                <Button (tap) = "RemoveItemFromList(item)" text="-rf"></Button>
-            </GridLayout>
-        </template>
-    </ListView>
+    <TextView [(ngModel)]="ToDoList"></TextView>
 </StackLayout>

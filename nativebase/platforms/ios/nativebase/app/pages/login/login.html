@@ -1,9 +1,8 @@
 <StackLayout class="form">
      
-    <TextField class="txtfield" hint="Focused TextField"  [(ngModel)] = "Email"></TextField>
-    <TextField class="txtfield" hint="Focused TextField"  [(ngModel)] = "Password"></TextField>
+    <TextField class="login-field" hint="Focused TextField"  [(ngModel)] = "Email"></TextField>
+    <TextField class="login-field" hint="Focused TextField"  [(ngModel)] = "Password"></TextField>
 
-    <!--<Button *ngIf = "!IsLoggedIn" text = "SIGN UP" (tap) = "SignUp()" ></Button>-->
-    <Button  text = "Log me in" (tap) = "LoginFunc()"></Button>
+    <Button  text = "LOG IN" (tap) = "Login()" class="btn btn-primary btn-rounded-lg" ></Button>
 
 </StackLayout>

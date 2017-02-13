@@ -1,19 +1,16 @@
 Button {
-    background-color: #37474F;
     margin-top: 15;
-    color: white;
-    border-radius: 15;
-    width: 50%;
-    height: 5%;
+    width: 60%;
+    height: 9%;
+    font-weight: 800;
 }
 
-.txtfield {
-    border-color: red;
-    border-width: 0 0 1 0;
-    margin-top: 15;
-    margin-left: 15;
-    margin-right: 15;
+.login-field{
+    width: 80%;
+    margin-top: 10;
+    margin-bottom: 10;
 }
+
 .form{
     margin-top: 30%;
 }

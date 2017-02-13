@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import firebase = require("nativescript-plugin-firebase");
-
+import { UIDProvider } from "../../shared/UID.Provider";
 
 @Component({
     selector: "Login",
     templateUrl: "pages/login/login.html",
-    styleUrls: ['pages/login/style.css']
+    styleUrls: ['pages/login/style.css'],
+    providers: [UIDProvider]
 })
 
 
@@ -16,14 +17,11 @@ export class Login implements OnInit {
     Password;
     IsLoggedIn;
 
-    constructor(private router: Router) { }
-
+    constructor(private router: Router, private UIDProvider: UIDProvider) { }
 
     ngOnInit() {
-        console.log("inside login screen")
-        this.IsLoggedIn = false
+        this.IsLoggedIn = false;
     }
-
 
     SignUp() {
         console.log(this.Email)
@@ -56,8 +54,7 @@ export class Login implements OnInit {
             password: this.Password
         }).then(
             (result) => {
-                JSON.stringify(result);
-                alert("congrats")
+                this.UIDProvider.UID = result.uid;
                 this.router.navigate(["List"]);
                 this.IsLoggedIn = true;
             },
@@ -66,7 +63,5 @@ export class Login implements OnInit {
                 this.IsLoggedIn = false;
             }
             )
-    }
-
-
+    };
 }

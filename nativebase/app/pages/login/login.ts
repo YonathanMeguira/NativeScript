@@ -1,66 +1,33 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import firebase = require("nativescript-plugin-firebase");
+import { FirebaseServices } from "./Firebase.services";
 import { UIDProvider } from "../../shared/UID.Provider";
+
 
 @Component({
     selector: "Login",
     templateUrl: "pages/login/login.html",
-    styleUrls: ['pages/login/style.css']
+    styleUrls: ['pages/login/style.css'],
+    providers: [FirebaseServices, UIDProvider]
 })
 
 
 export class Login implements OnInit {
 
-    Email;
-    Password;
-    IsLoggedIn;
-
-    constructor(private router: Router, private UIDProvider: UIDProvider) { }
+    private Email;
+    private Password;
+    IsLoggedIn: Boolean;
+    
+    constructor(private firebaseServices: FirebaseServices) { };
 
     ngOnInit() {
         this.IsLoggedIn = false;
-    }
-
-    SignUp() {
-        console.log(this.Email)
-        firebase.createUser({
-            email: this.Email,
-            password: this.Password
-        })
-            .then(
-            (result) => {
-                this.IsLoggedIn = true;
-                this.router.navigate(["List"]);
-
-            },
-            (errorMessage) => {
-                alert({
-                    title: "No user created",
-                    message: errorMessage,
-                    okButtonText: "OK, got it"
-                })
-                this.IsLoggedIn = false;
-            }
-            )
-    }
-
-
-    LoginFunc() {
-        firebase.login({
-            type: firebase.LoginType.PASSWORD,
-            email: this.Email,
-            password: this.Password
-        }).then(
-            (result) => {
-                this.UIDProvider.UID = result.uid;
-                this.router.navigate(["List"]);
-                this.IsLoggedIn = true;
-            },
-            (errorMessage) => {
-                console.log(errorMessage);
-                this.IsLoggedIn = false;
-            }
-            )
     };
+
+    Login() {
+        this.firebaseServices.Login(this.Email, this.Password)
+    }
+    Signup() {
+        return this.firebaseServices.SignUp(this.Email, this.Password);
+    };
+
 }
