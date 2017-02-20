@@ -16,23 +16,23 @@ import { FirebaseServices } from "../Login/Firebase.services";
 
 export class List implements OnInit {
 
-    NewItem = "";
+    public ToDoList: Array<any> = [];
 
-    ToDoList: Array<any>;
 
-    
+
     constructor(private firebaseServices: FirebaseServices) {
-      
 
-       
     }
 
     ngOnInit() {
-      var x = this.firebaseServices.GetData();
-      console.log("tasks =>", x);
+        console.log("inside list controller");
 
     }
 
+    Get() {
+        this.ToDoList.push(this.firebaseServices.task);
+        console.log(this.ToDoList)
+    }
     
 
 }

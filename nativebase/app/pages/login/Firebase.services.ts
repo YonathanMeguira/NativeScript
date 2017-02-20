@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import firebase = require("nativescript-plugin-firebase");
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Rx";
-import "rxjs/add/operator/map";
 
 @Injectable()
 
@@ -10,7 +9,11 @@ export class FirebaseServices {
 
 
 
-    public FirebaseUrl: string;
+    public FirebaseUrl: any;
+    public ToDos: Observable<Array<string>>;
+    public task: Array<any> = [];
+    private anyErrors: boolean;
+    private finished: boolean;
     constructor(private router: Router) {
 
     }
@@ -23,31 +26,43 @@ export class FirebaseServices {
             password: Password
         })
             .then(res => {
-                console.log("json version " + res.uid);
                 this.FirebaseUrl = "users/" + res.uid;
-                this.GetData();
                 this.router.navigate(["List"]);
-            }, error => {
+                return this.FirebaseUrl;
+            })
+            .then((FirebaseURL) => {
+                this.GetData(FirebaseURL);
+            },
+            error => {
                 alert("this account is not recognized...");
             })
 
 
     };
 
-    GetData() {
+    GetData(FBURL) {
 
-        console.log("retrieving data from " + this.FirebaseUrl);
         var onQueryEvent = (result) => {
             if (!result.error) {
                 var tasks = result.value.task;
                 console.log(tasks);
+                this.ToDos = new Observable(observer => {
+                    observer.next(tasks);
+                    observer.complete();
+                });
+                let subscription = this.ToDos.subscribe(
+                    value => this.task.push(value),
+                    error => this.anyErrors = true,
+                    () => this.finished = true
+                );
             } else {
                 console.log("an error occured")
             }
         }
+
         firebase.query(
             onQueryEvent,
-            this.FirebaseUrl,
+            FBURL,
             {
                 singleEvent: true,
                 orderBy: {
@@ -56,6 +71,7 @@ export class FirebaseServices {
             }
         )
     }
+
 
     SignUp(Email, Password) {
         firebase.createUser({
