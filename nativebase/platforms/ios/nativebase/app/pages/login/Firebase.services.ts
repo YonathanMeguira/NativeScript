@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import firebase = require("nativescript-plugin-firebase");
 import { Router } from "@angular/router";
-import { UIDProvider } from "../../shared/UID.Provider";
-
+import { Observable } from "rxjs/Rx";
+import "rxjs/add/operator/map";
 
 @Injectable()
 
@@ -10,9 +10,8 @@ export class FirebaseServices {
 
 
 
-    private FirebaseUrl: string;
-
-    constructor(private router: Router, private UIDProvider: UIDProvider) {
+    public FirebaseUrl: string;
+    constructor(private router: Router) {
 
     }
 
@@ -24,8 +23,9 @@ export class FirebaseServices {
             password: Password
         })
             .then(res => {
-                console.log("json version "+res.uid);
-                this.UIDProvider.UID.next(res.uid);
+                console.log("json version " + res.uid);
+                this.FirebaseUrl = "users/" + res.uid;
+                this.GetData();
                 this.router.navigate(["List"]);
             }, error => {
                 alert("this account is not recognized...");
@@ -34,24 +34,17 @@ export class FirebaseServices {
 
     };
 
-    GetData(UID) {
+    GetData() {
 
-        var MyData = [];
-        this.FirebaseUrl = "users/" + UID;
-        console.log("retrieving data from "+this.FirebaseUrl);
+        console.log("retrieving data from " + this.FirebaseUrl);
         var onQueryEvent = (result) => {
             if (!result.error) {
-                console.log(result)
-                for (let i in result.value.task) {   
-                    MyData.push(result.value.task[i])
-                }
-                console.log(MyData);
-                return MyData;
+                var tasks = result.value.task;
+                console.log(tasks);
             } else {
                 console.log("an error occured")
             }
-        };
-
+        }
         firebase.query(
             onQueryEvent,
             this.FirebaseUrl,
@@ -63,7 +56,6 @@ export class FirebaseServices {
             }
         )
     }
-
 
     SignUp(Email, Password) {
         firebase.createUser({

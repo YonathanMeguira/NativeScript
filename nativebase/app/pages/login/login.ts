@@ -1,13 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FirebaseServices } from "./Firebase.services";
-import { UIDProvider } from "../../shared/UID.Provider";
 
 
 @Component({
     selector: "Login",
     templateUrl: "pages/login/login.html",
     styleUrls: ['pages/login/style.css'],
-    providers: [FirebaseServices, UIDProvider]
+    providers: [FirebaseServices]
 })
 
 
@@ -16,11 +15,13 @@ export class Login implements OnInit {
     private Email;
     private Password;
     IsLoggedIn: Boolean;
-    
+
     constructor(private firebaseServices: FirebaseServices) { };
 
     ngOnInit() {
         this.IsLoggedIn = false;
+        this.Email = "johnmeguira@gmail.com";
+        this.Password = "Jm140890";
     };
 
     Login() {

@@ -5,8 +5,6 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { routes, navigatableComponents } from "./app.routing";
 import { AppComponent } from "./app.component";
-import { UIDProvider } from "./shared/UID.Provider";
-import { TaskService } from "./pages/list/task.service";
 import { FirebaseServices } from "./pages/login/Firebase.services";
 //telerik UI
 import listViewModule = require("nativescript-telerik-ui/listview");
